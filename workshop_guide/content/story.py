@@ -135,8 +135,8 @@ def cast():
 
 def timelines():
     left, right = st.columns(2)
-    for col, key, title, icon in [(left, "without", "A Tuesday without guards", ":material/sentiment_dissatisfied:"),
-                                  (right, "with", "The same Tuesday with guards", ":material/verified_user:")]:
+    for col, key, title, icon in [(left, "without", "A Monday without guards", ":material/sentiment_dissatisfied:"),
+                                  (right, "with", "The same Monday with guards", ":material/verified_user:")]:
         with col.container(border=True, height="stretch"):
             st.markdown(f"##### {icon} {title}")
             for when, what in TIMELINES[key]:
