@@ -4,6 +4,7 @@ import streamlit as st
 
 from components import render_real_world_examples, render_references
 from content import links as L
+from content import story
 
 _STATIC = Path(__file__).parent.parent / "static"
 
@@ -23,19 +24,16 @@ c3.metric("Faults", "4", help="Injected live, the same for everyone")
 c4.metric("Bonus labs", "3", help="Budgets, governance + GDPR, DCM DevOps")
 
 st.space("medium")
+st.markdown("#### :material/groups: Who's in this story")
+story.cast()
 st.markdown("#### :material/support_agent: The complaint")
-with st.container(border=True):
-    st.markdown("""
-**Riverside Leisure** (a fictional operator with three sites in Oxfordshire) rings Customer Success:
-
-> *"Nova says we have more active members than our front desk can count, and today's revenue looks far too low."*
-
-The answer came from Nova's semantic view, reading REPORTING Dynamic Tables, built from Bronze tables that
-Bifrost merges in from Riverside's Azure SQL. Something upstream broke.
-
-Today Gladstone finds out **when the operator rings**. This lab turns that around: the checks fire first,
-an incident is logged, the REPORTING refresh is paused, and Customer Success already knows the cause.
-""")
+with st.chat_message("Sam", avatar=":material/storefront:"):
+    st.markdown("**Sam, Riverside Leisure:** *\"Nova says we have more active members than our front desk can count, "
+                "and today's revenue looks far too low.\"*")
+st.markdown("Riverside Leisure is a fictional operator with three sites in Oxfordshire. Sam's numbers come from Nova's "
+            "semantic view, which reads REPORTING Dynamic Tables built from the Bronze tables Bifrost merges in. "
+            "Today Gladstone finds out **when Sam rings**. This lab turns that around:")
+story.timelines()
 
 st.markdown("#### :material/route: What, how and why")
 w, h, y = st.columns(3)
@@ -81,17 +79,6 @@ digraph {
   dq -> inc [style=dashed]; dq -> cb [style=dashed]; cb -> dt [style=dashed, label="suspend"];
 }
 """, alt="Diagram of Riverside's pipeline: source, merge task, Bronze, REPORTING dynamic tables, semantic view, Nova; guards on Bronze and REPORTING feed an incident alert and a circuit breaker that freezes REPORTING")
-
-st.markdown("#### :material/checklist: From reactive to proactive")
-st.markdown("""
-| Today | After this lab | Session |
-|---|---|---|
-| The operator notices wrong numbers | A check fails within minutes of the bad batch | 2-3 |
-| CS opens a ticket and waits for engineering | An incident row and an email already say which check, table and batch | 2-3 |
-| Wrong numbers keep flowing into Nova | A circuit breaker pauses REPORTING until Bronze is clean | 3 |
-| Root cause found by hand | CoCo follows the evidence and writes the explanation | 3 |
-| No single view of pipeline health | `V_DQ_HEALTH`: every check, OK/FAILING, incidents | 4 |
-""")
 
 render_real_world_examples([
     {"title": "Before a Nova answer reaches an operator", "body": "Guards on the Bronze tables Bifrost writes to, so a bad sync is caught at Bronze - and, with checks run on change, held back before the Nova Portal refreshes."},

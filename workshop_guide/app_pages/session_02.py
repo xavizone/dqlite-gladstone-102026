@@ -4,9 +4,11 @@ from components import (render_checkpoint, render_execution_context, render_expl
                         render_key_concepts, render_prompt, render_real_world_examples, render_references,
                         render_session_header, render_snowsight_route, render_technologies_used, render_what_why)
 from content import links as L
+from content import story
 
 render_session_header("Session 2", "Put guards on it", "8 min", "Checks with pass/fail rules, an email, and an incident log")
 render_execution_context()
+story.chapter(2)
 render_what_why(
     "Turn each thing that must always be true about Riverside's data into an **expectation** on a data metric function (DMF). "
     "Then make failures **tell someone**: an email for the critical checks, and an alert that writes every failure to `DQ_INCIDENTS`.",
@@ -59,6 +61,7 @@ ALTER ALERT {FQ_SCHEMA}.DQ_INCIDENT_ALERT RESUME;""")
 render_checkpoint("All expectations **pass** on clean data, two checks notify by email, and `DQ_INCIDENT_ALERT` is **started** "
                   "with `DQ_INCIDENTS` still empty. Tell the facilitator you're ready - faults go in next.",
                   "SHOW ALERTS IN SCHEMA {FQ_SCHEMA};\nSELECT COUNT(*) FROM {FQ_SCHEMA}.DQ_INCIDENTS;  -- 0")
+story.turn(2)
 render_explanation("Email, alert, or both?", """
 **Data quality notifications** are built in: one setting per database, switched on per check. Good for the few checks
 that should wake someone up. They have a cooldown, so you aren't flooded.

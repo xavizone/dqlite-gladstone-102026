@@ -21,3 +21,16 @@
 | Has a Snowflake user | `CALL GLADSTONE_DQ_LITE.ADMIN.ADD_ATTENDEE('JOE', 'JBLOGGS');` (as ACCOUNTADMIN or SECURITYADMIN, about 20 s). If faults are already in: `INJECT('JOE', n)` for each one so far |
 | No Snowflake user | Pair with a neighbour |
 | Broke their copy | `CALL GLADSTONE_DQ_LITE.ADMIN.RESET_ATTENDEE('NIELS');` - fresh copy; they redo Session 2 using the catch-up boxes |
+
+## Say this (story script)
+
+Cast: **Sam** (operator ops manager), **Priya** (Gladstone Customer Success), **you** (on-call data engineer). Read the line, then let the room work. Same words as the chapter cards in the guide.
+
+| When | Say |
+|---|---|
+| Minute 0 (opener, 60 s) | "Riverside Leisure rang us this morning: Nova says too many members and too little revenue. Today you're the on-call engineer. In 30 minutes we'll go from the operator telling us, to us telling the operator." |
+| Start of chapter 1: The complaint | "First, find where those two numbers come from - and write down what they say on a good day." |
+| Start of chapter 2: Guard | "Nothing is broken yet. Put guards on the pipeline now, so the next problem logs itself." |
+| Start of chapter 3: Catch and contain | "I'm breaking Riverside's feed now. Watch your incident log - then tell me what happened before Sam calls." |
+| Start of chapter 4: Operate | "One more fault, and Priya needs one place to look. Build it, fix the data, and watch it heal." |
+| Close | Read the epilogue on the last session page aloud. |

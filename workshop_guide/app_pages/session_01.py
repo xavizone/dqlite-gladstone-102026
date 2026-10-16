@@ -4,9 +4,11 @@ from components import (render_checkpoint, render_execution_context, render_expl
                         render_prompt, render_real_world_examples, render_references, render_session_header,
                         render_snowsight_route, render_technologies_used, render_what_why)
 from content import links as L
+from content import story
 
 render_session_header("Session 1", "The complaint", "5 min", "Your mental model of Riverside's Nova pipeline")
 render_execution_context()
+story.chapter(1)
 with st.container(border=True):
     st.markdown(""":material/support_agent: **Riverside Leisure, on the phone to Customer Success:**
 *"Nova says we have more active members than our front desk can count, and today's revenue looks far too low."*""")
@@ -48,6 +50,7 @@ WHERE payment_date >= CURRENT_DATE() - 2 ORDER BY payment_date;""")
 
 render_checkpoint("On clean data you see **1,598 active members** by status and **1,520** paid in the last 35 days, "
                   "plus a net revenue figure per day. Note them: in Session 3 they move.")
+story.turn(1)
 render_explanation("Why two answers for active members?", """
 `am.active_members` counts members whose **source status** is `ACTIVE`. The verified query (`vq_active_members`) uses the
 **finance definition**: members who **paid in the last 35 days**. About 6% of ACTIVE members haven't paid for longer,

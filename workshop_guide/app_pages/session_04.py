@@ -4,11 +4,12 @@ from components import (render_checkpoint, render_execution_context, render_expl
                         render_prompt, render_real_world_examples, render_references, render_session_header,
                         render_snowsight_route, render_technologies_used, render_what_you_built, render_what_why)
 from content import links as L
+from content import story
 
 render_session_header("Session 4", "Operate it", "8 min", "One health view, a semantic fault, and a recovery")
 render_execution_context()
-st.info("At minute 23 the facilitator injects **fault 4**: a source re-sends cancelled members as ACTIVE. "
-        "No row is malformed - it's a business-rule break.", icon=":material/bug_report:")
+story.chapter(4)
+story.ticket("s4")
 render_what_why(
     "Build `V_DQ_HEALTH`, the one view Customer Success opens first: every check, OK or FAILING, and its incident history. "
     "Then catch fault 4, fix the data the way the source team would, and watch the breaker close by itself.",
@@ -35,6 +36,8 @@ render_snowsight_route([
 
 render_checkpoint("`V_DQ_HEALTH` showed **4 FAILING** checks including `NO_ACTIVE_LEAVERS` (292). After the fix every check is **OK**, "
                   "the breaker returns **CLOSED: Bronze clean**, REPORTING is running again, and `DQ_INCIDENTS` keeps the history.")
+story.turn(4)
+story.epilogue()
 render_explanation("Why does reporting_within_5min fail after the fix?", """
 While the breaker was OPEN, REPORTING was frozen on purpose, so it fell behind Bronze (about 500 seconds in the dry run).
 The first check after the breaker closes measures that gap and fails once; the next run passes. The breaker only watches

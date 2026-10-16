@@ -22,6 +22,7 @@
 
 ## Things to know
 
+- **The story.** Three characters run through every page: **Sam**, operations manager at Riverside Leisure; **Priya**, Gladstone's Customer Success lead; and **you**, the on-call data engineer. Each session is a chapter (The complaint, Guard, Catch and contain, Operate) and opens with what just happened and your mission.
 - **One operator, one complaint.** Riverside Leisure (fictional, three sites in Oxfordshire) says Nova's active members are too high and revenue too low. You'll guard its pipeline so the next problem is caught before the operator notices.
 - **You get your own copy.** Your schema `RIVERSIDE_<NAME>` is your own copy of Riverside's pipeline. Everyone shares one role, so you *can* see other schemas - only work in yours.
 - **The data is synthetic.** Members, bookings, payments and check-ins are generated for the lab. No real member data is used.

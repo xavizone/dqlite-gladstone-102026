@@ -4,12 +4,12 @@ from components import (render_checkpoint, render_execution_context, render_expl
                         render_prompt, render_real_world_examples, render_references, render_session_header,
                         render_snowsight_route, render_technologies_used, render_what_why)
 from content import links as L
+from content import story
 
 render_session_header("Session 3", "Catch, explain, contain", "9 min", "A root cause from one prompt, and a circuit breaker")
 render_execution_context()
-st.warning("The facilitator is injecting **faults 1-3** into every pipeline (minutes 13, 16 and 18). Checks run every 5 minutes; "
-           "your incident alert picks failures up within a minute after that. You can also ask CoCo to evaluate now.",
-           title="Riverside's pipeline is about to break")
+story.chapter(3)
+story.ticket("s3")
 render_what_why(
     "Watch your guards fire, then ask CoCo what broke and why - the way Customer Success would. Then add a **circuit breaker** "
     "that pauses the REPORTING refresh while any Bronze check is failing, so no further bad batches reach Nova.",
@@ -49,6 +49,7 @@ SHOW DYNAMIC TABLES IN SCHEMA {FQ_SCHEMA};""")
 
 render_checkpoint("`DQ_INCIDENTS` has rows for **duplicates (150)**, **negative amounts (40)** and **freshness (over 180 s)**. "
                   "The breaker returns **OPEN** and both REPORTING tables are **SUSPENDED**: nothing new reaches Nova until Bronze is clean.")
+story.turn(3)
 render_explanation("What each fault looks like", """
 | If CoCo finds... | It's the... | Notice |
 |---|---|---|
